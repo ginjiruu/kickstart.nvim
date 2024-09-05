@@ -1,5 +1,6 @@
 return {
   'christoomey/vim-tmux-navigator',
+  event = 'VimEnter', -- Ensure it loads when Neovim starts
   cmd = {
     'TmuxNavigateLeft',
     'TmuxNavigateDown',
@@ -8,10 +9,9 @@ return {
     'TmuxNavigatePrevious',
   },
   keys = {
-    { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
-    { '<c-s>', '<cmd><C-U>TmuxNavigateDown<cr>' },
-    { '<c-t>', '<cmd><C-U>TmuxNavigateUp<cr>' },
-    { '<c-n>', '<cmd><C-U>TmuxNavigateRight<cr>' },
-    { '<c-q>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+    { '<c-left>', '<cmd>TmuxNavigateLeft<cr>' },
+    { '<c-down>', '<cmd>TmuxNavigateDown<cr>' },
+    { '<c-up>', '<cmd>TmuxNavigateUp<cr>' },
+    { '<c-right>', '<cmd>TmuxNavigateRight<cr>' },
   },
 }
