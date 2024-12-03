@@ -12,7 +12,7 @@ return {
         -- ['local'] = true,
         api_key_name = 'ollama_api_key',
         endpoint = 'http://10.10.5.17:11434/v1',
-        -- endpoint = 'https://ai.animeteamspeak.moe',
+        -- endpoint = 'https://ai.animeteamspeak.moe/ollama/v1',
         model = 'qwen2.5-coder:14b',
         parse_curl_args = function(opts, code_opts)
           return {

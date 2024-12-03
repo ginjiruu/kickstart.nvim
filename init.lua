@@ -25,6 +25,23 @@ vim.opt.shiftwidth = 2
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+-- Navigate windows using Ctrl + Shift + Arrow Keys
+
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- Left
+map('n', '<C-S-Left>', ':wincmd h<CR>', opts)
+
+-- Right
+map('n', '<C-S-Right>', ':wincmd l<CR>', opts)
+
+-- Up
+map('n', '<C-S-Up>', ':wincmd k<CR>', opts)
+
+-- Down
+map('n', '<C-S-Down>', ':wincmd j<CR>', opts)
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -547,6 +564,7 @@ require('lazy').setup({
         clangd = {},
         kcl = {},
         gopls = {},
+        yamlls = {},
         templ = {
           filetypes = { 'templ' },
         },
