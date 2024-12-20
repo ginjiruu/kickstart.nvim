@@ -560,11 +560,30 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        bashls = {},
         rust_analyzer = {},
-        clangd = {},
+        clangd = {
+          cmd = { 'clangd' },
+          filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+          root_dir = require('lspconfig.util').root_pattern('.git', 'compile_commands.json', 'build/', 'src/'),
+          capabilities = vim.lsp.protocol.make_client_capabilities(),
+          settings = {
+            clangd = {
+              arguments = {
+                '--all-scopes-completion',
+                '--clang-tidy',
+                '--header-search-path=' .. os.getenv 'HOME' .. '~/bake/include',
+                '--header-search-path=/usr/local/include', -- Add other system paths if needed
+                '--background-index',
+                '--pch-storage=memory',
+              },
+            },
+          },
+        },
         kcl = {},
         gopls = {},
         yamlls = {},
+        -- helm-ls = {},
         templ = {
           filetypes = { 'templ' },
         },
