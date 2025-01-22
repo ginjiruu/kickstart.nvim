@@ -561,7 +561,6 @@ require('lazy').setup({
         -- ts_ls = {},
         --
         bashls = {},
-        rust_analyzer = {},
         clangd = {
           cmd = { 'clangd' },
           filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
@@ -867,7 +866,23 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'go', 'rust', 'toml' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'diff',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'go',
+        'rust',
+        'toml',
+        'fish',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -935,6 +950,23 @@ require('lazy').setup({
     },
   },
 })
-
+vim.filetype.add {
+  extension = {
+    c3 = 'c3',
+    c3i = 'c3',
+    c3t = 'c3',
+  },
+}
+local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+parser_config.c3 = {
+  install_info = {
+    url = '~/projects/tree-sitter-c3',
+    files = { 'src/parser.c', 'src/scanner.c' },
+    branch = 'main',
+    generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+  },
+}
+require('lspconfig').kcl.setup {}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
