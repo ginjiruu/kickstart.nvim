@@ -8,6 +8,17 @@ return {
   config = function()
     require('telescope').load_extension 'yaml_schema'
   end,
+  setup = function()
+    require('yaml_companion').setup {
+      -- Your additional configuration options here
+      schemas = {
+        {
+          name = 'Portable Cluster',
+          uri = vim.fn.expand '~/.cache/nvim-k8s-crd/portable/all.json',
+        },
+      },
+    }
+  end,
   keys = {
     -- Define the keymap
     {
