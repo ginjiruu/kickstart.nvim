@@ -4,37 +4,6 @@ return {
   lazy = false,
   version = false, -- set this if you want to always pull the latest change
   opts = {
-    provider = 'ollama',
-    use_absolute_path = true,
-    vendors = {
-      ---@type AvanteProvider
-      ollama = {
-        -- ['local'] = true,
-        api_key_name = 'ollama_api_key',
-        endpoint = 'http://10.10.5.17:11434/v1',
-        -- endpoint = 'https://ai.animeteamspeak.moe/ollama/v1',
-        model = 'qwen2.5-coder:14b',
-        parse_curl_args = function(opts, code_opts)
-          return {
-            url = opts.endpoint .. '/chat/completions',
-            headers = {
-              ['Accept'] = 'application/json',
-              ['Content-Type'] = 'application/json',
-              ['x-api-key'] = 'ollama',
-            },
-            body = {
-              model = opts.model,
-              messages = require('avante.providers').copilot.parse_messages(code_opts), -- you can make your own message, but this is very advanced
-              max_tokens = 2048,
-              stream = true,
-            },
-          }
-        end,
-        parse_response_data = function(data_stream, event_state, opts)
-          require('avante.providers').openai.parse_response(data_stream, event_state, opts)
-        end,
-      },
-    },
     behaviour = {
       auto_suggestions = false, -- Experimental stage
       auto_set_highlight_group = true,

@@ -5,10 +5,35 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
+-- vim.schedule(function()
+--   vim.opt.clipboard = 'unnamedplus'
+-- end)
+
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+  vim.opt.clipboard = {
+    -- vim.g.clipboard = {
+    name = 'gpaste',
+    copy = {
+      ['+'] = { 'gpaste-client', 'add' },
+      ['*'] = { 'gpaste-client', 'add' },
+    },
+    paste = {
+      ['+'] = { 'gpaste-client', 'get', '--use-index', '0' },
+      ['*'] = { 'gpaste-client', 'get', '--use-index', '0' },
+    },
+    cache_enabled = 0,
+  }
 end)
 
+-- vim.schedule(function()
+--   vim.opt.clipboard = {
+--     'name': 'gpaste',
+--     'copy': {
+--       '+': ['gpaste-client', 'add']
+--     }
+--   } ---'unnamedplus'
+-- end)
+--
 -- Enable break indent
 vim.opt.breakindent = true
 
